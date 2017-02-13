@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@class LLLockView;
+
+@protocol LLLockViewDelegate <NSObject>
+
+- (BOOL)lockView:(LLLockView *)lockView withPwd:(NSString *)pwd;
+
+@end
 
 @interface LLLockView : UIView
+
+@property (nonatomic, weak) id<LLLockViewDelegate> delegate;
 
 @end

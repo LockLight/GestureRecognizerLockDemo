@@ -10,7 +10,7 @@
 #import "LLLockView.h"
 #import "Masonry.h"
 
-@interface ViewController ()
+@interface ViewController ()<LLLockViewDelegate>
 
 @end
 
@@ -21,6 +21,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self setupUI];
 }
+
+
 
 - (void)setupUI{
     //添加背景视图
@@ -40,6 +42,8 @@
     LLLockView *lockView = [[LLLockView alloc]init];
     
     [self.view addSubview:lockView];
+    //设置代理
+    lockView.delegate = self;
     
     [lockView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
@@ -47,6 +51,20 @@
     }];
     
 }
+
+- (bool)lockView:(LLLockView *)lockView withPwd:(NSString *)pwd{
+    if([pwd isEqualToString:@"2"]){
+        UIViewController *vc = [[UIViewController alloc]init];
+        vc.view.backgroundColor =[UIColor groupTableViewBackgroundColor];
+        
+        [self presentViewController:vc animated:YES completion:nil];
+        
+        return YES;
+    }
+    return NO;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
